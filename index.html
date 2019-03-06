@@ -24,40 +24,48 @@
 
   <body>
 
+    <script>        
+var samplemodel = `
+participant User
+participant App
+participant Server
+participant Auth Server
+ 
+Title: Simplified User View Data
+User->App: launches App
+App->>Server: Checks for updates
+Server-->>App: Responds with updates
+App-->>User: Displays Login
+User->>App: Provides Credentials
+App->>Auth Server:Checks Auth
+Auth Server-->>App: returns single-use token
+App->> Server: Sends request for data with single-use token
+Server-->> App: Responds with data
+App-->> User: Displays Data to User        
+        `; </script>
+
 
     <div id="main"> 
+      <h5 class="maintitle">Sequence Diagram Editor</h5>
 
-      <button title="Reset" onclick="localStorage.setItem('sequence',`participant Customer
-participant IE Embedded
-participant BankingCloud UI
-participant BankingCloud API
-participant Mongo
-participant Yodlee UI
-participant Yodlee API
-participant Bank
- 
-Title: Aggregator - Yodlee API - Happy Path
-Customer->IE Embedded: invokes`)">Load Sample</button>
       <section id="flowedit">
-        <table align="center" class="inner">
-          <tbody><tr>
-            <td>
-            <h3>Edit</h3>
+
             <div class="editor-wrapper">
               <div class="editor ace_editor ace-crimson-editor ace_focus" draggable="false"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 16px; width: 7.20125px; left: 45px; top: 0px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 242px; width: 41px;"><div class="ace_gutter-cell " style="height: 16px;">1</div></div><div class="ace_gutter-active-line" style="top: 0px; height: 16px;"></div></div><div class="ace_scroller" style="left: 41px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 459px; height: 242px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 580.1px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:16px;top:0px;left:0;right:0;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:16px"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer"><div class="ace_cursor" style="left: 4px; top: 0px; width: 7.20125px; height: 16px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="width: 20px; bottom: 0px; display: none;"><div class="ace_scrollbar-inner" style="width: 20px; height: 16px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="height: 20px; left: 41px; right: 0px; display: none;"><div class="ace_scrollbar-inner" style="height: 20px; width: 452px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div></div><div class="ace_tooltip" style="display: none; left: 83px; top: 272px;"></div></div>
             </div>
-            Theme:
+
+            <span class="theme-label">Theme:</span>
             <select class="theme">
               <option value="simple" selected="">Simple</option>
               <option value="hand">Hand drawn</option>
-            </select>
+            </select> 
             | <a href="" class="download" download="diagram.svg">Download as SVG</a>
-            </td>
-            </tr>
-            <tr>
-            <td class="diagram"><svg width="20px" height="20px" class="sequence simple"><desc></desc><defs><marker viewBox="0 0 5 5" markerWidth="5" markerHeight="5" orient="auto" refX="5" refY="2.5" id="markerArrowBlock"><path d="M 0 0 L 5 2.5 L 0 5 z"></path></marker><marker viewBox="0 0 9.6 16" markerWidth="4" markerHeight="16" orient="auto" refX="9.6" refY="8" id="markerArrowOpen"><path d="M 9.6,8 1.92,16 0,13.7 5.76,8 0,2.286 1.92,0 9.6,8 z"></path></marker></defs><g class="title"></g></svg></td>
-          </tr>
-        </tbody></table>
+            | <button title="Reset" onclick="localStorage.setItem('sequence',samplemodel); window.location.reload(false);">Load Sample (refresh)</button>
+
+            <div class="diagram">
+                <svg width="20px" height="20px" class="sequence simple"><desc></desc><defs><marker viewBox="0 0 5 5" markerWidth="5" markerHeight="5" orient="auto" refX="5" refY="2.5" id="markerArrowBlock"><path d="M 0 0 L 5 2.5 L 0 5 z"></path></marker><marker viewBox="0 0 9.6 16" markerWidth="4" markerHeight="16" orient="auto" refX="9.6" refY="8" id="markerArrowOpen"><path d="M 9.6,8 1.92,16 0,13.7 5.76,8 0,2.286 1.92,0 9.6,8 z"></path></marker></defs><g class="title"></g>
+                </svg>
+            </div>
 
       </section>
 
@@ -88,6 +96,9 @@ Customer->IE Embedded: invokes`)">Load Sample</button>
 
         // Setup the editor diagram
         var editor = ace.edit(editor_div.get(0));
+        editor.setOptions({
+            maxLines: 500
+        });
         editor.setTheme("ace/theme/crimson_editor");
         editor.getSession().setMode("ace/mode/asciidoc");
         editor.setValue(localStorage.getItem('sequence'));
@@ -98,7 +109,47 @@ Customer->IE Embedded: invokes`)">Load Sample</button>
           var width = parseInt(svg.width.baseVal.value);
           var height = parseInt(svg.height.baseVal.value);
           var data = editor.getValue();
-          var xml = '<?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" xmlns:xlink="http://www.w3.org/1999/xlink"><source><![CDATA[' + data + ']]></source>' + svg.innerHTML + '</svg>';
+          var svgStyles = `
+              <style>
+    /* <![CDATA[ */
+
+.title text, .actor text, .signal text, .note text {
+    fill: #ffffff !important;
+}
+
+.actor line {
+  stroke:#ffffff;
+}
+
+.sequence>line:nth-of-type(1) {
+    stroke: #ff0000 !important;
+}
+
+.title text:hover {
+    fill: #ffffff;
+}
+rect{
+    stroke: #ffffff;
+    fill: none;
+}
+
+path {
+    stroke: #ffffff;
+}
+
+#markerArrowBlock {
+    fill:white;
+    stroke: none;
+}
+
+#markerArrowOpen {
+    stroke: white;
+    fill: white;
+}
+            /* ]]> */
+          </style>
+          `
+          var xml = '<?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" xmlns:xlink="http://www.w3.org/1999/xlink"><source><![CDATA[' + data + ']]></source>' + svg.innerHTML + (svgStyles?svgStyles:'') + '</svg>';
 
           var a = $(this);
           a.attr("download", "diagram.svg"); // TODO I could put title here

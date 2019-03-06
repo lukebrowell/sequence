@@ -1,8 +1,8 @@
 
 body {
   font-size: 15px;
-  line-height: 1.5; 
-  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+  line-height: 1.5;
+  background: #033348;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-weight: 400;
   color: #666;
@@ -41,8 +41,8 @@ header h2 {
   letter-spacing: 0;
 }
 
-#main {
-  padding: 10px;
+.maintitle {
+    margin: 2px;
 }
 
 #main h1 {
@@ -100,7 +100,6 @@ header h2 {
 }
 
 .editor-wrapper {
-
 }
 
 .gh-forkme {
@@ -135,4 +134,47 @@ aside#sidebar {
 aside#sidebar p.repo-owner,
 aside#sidebar p.repo-owner a {
   font-weight: bold;
+}
+
+.diagram {
+  margin: 10px 0 0 0;
+}
+
+
+.title text, .actor text, .signal text, .note text {
+    fill: #ffffff !important;
+}   
+
+.signal line {
+  /* stroke: #ffffff; */
+}
+
+.actor line {
+  stroke:#ffffff;
+}
+
+.title text:hover {
+    fill: #ffffff;
+}
+rect{
+    stroke: #ffffff;
+    fill: none;
+}
+
+path {
+    stroke: #ffffff;
+}
+
+#markerArrowBlock {
+    fill:white;
+    stroke: none;
+}
+
+#markerArrowOpen {
+    stroke: white;
+    fill: white;
+}
+
+.theme-label, .theme {
+  display: none
 }
