@@ -1,1 +1,1 @@
-conflict
+foo
